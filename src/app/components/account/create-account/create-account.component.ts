@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from '../../services/account/shared/account.service';
 
 @Component({
   selector: 'app-create-account',
@@ -12,12 +13,23 @@ export class CreateAccountComponent implements OnInit {
     email: '',
     password: ''
   }
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private accountService: AccountService
+    ) { }
 
   ngOnInit(): void {
   }
-  onSubmit() {
-
+  async onSubmit() {
+    try{
+      const result = await this.accountService.createAccount(this.account);
+      if(result){
+        this.accountService.showMessage('Conta criada com sucesso!')
+        this.router.navigate([''])
+      }
+    } catch(error){
+      console.error(error)
+    }
   }
   back(){
     this.router.navigate(['/login'])

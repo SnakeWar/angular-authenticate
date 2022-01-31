@@ -37,6 +37,8 @@ import { LoginComponent } from './components/account/login/login.component';
 import { CreateAccountComponent } from './components/account/create-account/create-account.component';
 import { AuthenticationComponent } from './components/template/authentication/authentication.component';
 
+import { httpInterceptorProviders } from './http-interceptors/index';
+
 registerLocaleData(localePt);
 
 @NgModule({
@@ -76,10 +78,13 @@ registerLocaleData(localePt);
     MatPaginatorModule,
     MatSortModule,
   ],
-  providers: [DatePipe, {
+  providers: [DatePipe,
+    httpInterceptorProviders,
+    {
     provide: LOCALE_ID,
-    useValue: 'pt-BR'
-  }],
+    useValue: 'pt-BR',
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

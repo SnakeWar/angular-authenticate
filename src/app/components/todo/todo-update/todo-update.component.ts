@@ -10,7 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TodoUpdateComponent implements OnInit {
 
-  todo: Todo;
+  todo: Todo = {
+    name: '',
+    date: ''
+  };
 
   constructor(
     private todoService: TodoService,

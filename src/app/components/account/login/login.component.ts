@@ -22,18 +22,13 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     try {
       const result = await this.accountService.login(this.login);
-      if(result && result.access_token){
-        window.localStorage.setItem('token', result.access_token);
-        console.log('true')
-        console.log(window.localStorage.getItem('token'));
+      //console.log('true')
+      //console.log(`Login efetuado: ${result}`);
+      if(result){
         this.accountService.showMessage('Login efetuado!')
         this.router.navigate(['']);
       }
-      console.log('falso')
-      return false;
-      console.log(`Login efetuado: ${result}`);
-      this.accountService.showMessage('Login efetuado!')
-      this.router.navigate(['']);
+      
     }catch (error) {
       console.error(error);
     }
