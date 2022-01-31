@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-title>Entrar</mat-card-title>
+    <form (ngForm)="onSubmit()" #form="ngForm">
+        <mat-form-field>
+            <input type="email" name="email" [(ngModel)]="login.email" matInput placeholder="E-mail" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" name="password" [(ngModel)]="login.password" matInput placeholder="Senha" required>
+        </mat-form-field>
+        <button [disabled]="form.form.invalid" (click)="onSubmit()" type="submit" mat-raised-button color="primary">
+            Entrar
+        </button>
+        <button (click)="createAccount()" type="submit" mat-raised-button color="">
+            Criar conta
+        </button>
+    </form>
+    
+</mat-card>

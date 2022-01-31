@@ -1,0 +1,11 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+button {
+    margin: 15px;
+}
+.delete {
+    background-color: #e35e6b;
+    color: #fff;
+}

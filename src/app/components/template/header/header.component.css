@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+.header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.header .logo {
+    width: 100px;
+}
+.title-group i {
+    color: black;
+}

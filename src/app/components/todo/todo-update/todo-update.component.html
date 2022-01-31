@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-title>Nova Tarefa</mat-card-title>
+    <form action="">
+        <mat-form-field>
+            <input name="name" [(ngModel)]="todo.name" type="text" matInput placeholder="Nome">
+        </mat-form-field>
+        <mat-form-field>
+            <input name="date" [(ngModel)]="todo.date" type="date" matInput placeholder="Data">
+        </mat-form-field>
+        
+    </form>
+    <button (click)="updateTodo()" mat-raised-button color="primary">
+        Atualizar
+    </button>
+    <button (click)="cancelar()" mat-raised-button color="">
+        Cancelar
+    </button>
+</mat-card>

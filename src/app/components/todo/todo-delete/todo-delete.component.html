@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-title>Confirme para excluir a tarefa</mat-card-title>
+    <form action="">
+        <mat-form-field>
+            <input disabled name="name" [value]="todo.name" type="text" matInput placeholder="Nome">
+        </mat-form-field>
+        <mat-form-field>
+            <input disabled name="date" [value]="todo.date" type="date" matInput placeholder="Data">
+        </mat-form-field>
+        
+    </form>
+    <button (click)="deleteTodo()" mat-raised-button class="delete">
+        Confirmar
+    </button>
+    <button (click)="cancelar()" mat-raised-button color="">
+        Cancelar
+    </button>
+</mat-card>

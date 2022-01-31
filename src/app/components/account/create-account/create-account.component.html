@@ -1,0 +1,22 @@
+<mat-card>
+    <mat-card-title>Criar conta</mat-card-title>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <mat-form-field>
+            <input type="text" name="name" [(ngModel)]="account.name" matInput placeholder="Nome" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="email" name="email" [(ngModel)]="account.email" matInput placeholder="E-mail" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" name="password" [(ngModel)]="account.password" matInput placeholder="Senha" required>
+        </mat-form-field>
+        <button [disabled]="form.form.invalid" type="submit" mat-raised-button color="primary">
+            Cadastrar
+        </button>
+        <button (click)="back()" mat-raised-button color="">
+            Voltar
+        </button>
+    </form>
+    
+    
+</mat-card>
