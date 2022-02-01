@@ -1,5 +1,5 @@
 import { environment } from './../../../../../environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
@@ -39,10 +39,22 @@ export class AccountService {
     return false;
   }
 
-  async logout(account: any) {
-    const result = await this.http.post<any>(`${environment.api}/auth/signout`, account)
+  async logout() {
+    const token = window.localStorage.getItem('token');
+    const result = await this.http.post<any>(`${environment.api}/auth/signout`, {
+      headers:
+        new HttpHeaders(
+          {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'MyClientCert': '',        // This is empty
+            'Authorization': `Bearer ${token}` // This is empty
+          }
+        )
+    })
     .toPromise();
     if(result){
+      window.localStorage.clear();
       return result;
     }
     return false;
