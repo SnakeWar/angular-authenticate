@@ -37,7 +37,7 @@ import { LoginComponent } from './components/account/login/login.component';
 import { CreateAccountComponent } from './components/account/create-account/create-account.component';
 import { AuthenticationComponent } from './components/template/authentication/authentication.component';
 
-import { httpInterceptorProviders } from './http-interceptors/index';
+import { httpInterceptorProviders } from './http-interceptors';
 
 registerLocaleData(localePt);
 

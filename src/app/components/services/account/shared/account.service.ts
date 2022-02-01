@@ -1,5 +1,5 @@
-import { environment } from './../../../../../environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { environment } from './../../../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
@@ -26,6 +26,9 @@ export class AccountService {
     if(result && result.access_token){
       //console.log('login')
       window.localStorage.setItem('token', result.access_token);
+      window.localStorage.setItem('user', result.user);
+      //sessionStorage.setItem('token', result.access_token);
+      //sessionStorage.setItem('token', result.user);
       return true;
     }
     return false;
@@ -39,17 +42,27 @@ export class AccountService {
     return false;
   }
 
-  async logout(account: any) {
-    const result = await this.http.post<any>(`${environment.api}/auth/signout`, account)
+  async logout() {
+    const token = window.localStorage.getItem('token');
+    const result = await this.http.post<any>(`${environment.api}/auth/signout`, {
+      headers: new HttpHeaders(
+        {
+          'Authorization': 'Bearer ' + token,
+        }),
+        //responseType: ResponseContentType.Blob,
+      })
     .toPromise();
     if(result){
+      window.localStorage.clear();
       return result;
+      
     }
-    return false;
+    return result;
   }
 
   getAuthorizationToken(){
     const token = window.localStorage.getItem('token');
+    //const token = sessionStorage.getItem('token');
     return token;
   }
 
