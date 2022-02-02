@@ -3,14 +3,23 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@a
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AccountService } from '../components/services/account/shared/account.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
+    private snackBar: MatSnackBar
   ) { }
 
+  showMessage(msg: string): void {
+    this.snackBar.open(msg, 'Fechar', {
+      duration: 3000,
+      horizontalPosition: "right",
+      verticalPosition: "top"
+    })
+  }
   intercept(req: HttpRequest<any>, next: HttpHandler) {
 
     const token = this.accountService.getAuthorizationToken();
@@ -27,20 +36,24 @@ export class AuthInterceptor implements HttpInterceptor {
         headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
     }
-
     // retorno o request com o erro tratado
     return next.handle(request)
       .pipe(
         catchError(this.handleError)
       );
   }
-
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // Erro de client-side ou de rede
       console.error('Ocorreu um erro:', error.error.message);
     } else {
       // Erro retornando pelo backend
+      if(error.status === 401){
+        console.error('E-mail ou senha inválidos!')
+      }
+      else if(error.status === 422){
+        console.error('Senha muito curta!')
+      }
       console.error(
         `Código do erro ${error.status}, ` +
         `Erro: ${JSON.stringify(error.error)}`);
