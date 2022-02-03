@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       
     }catch (error) {
       console.error('Erro Login:'+error);
-        this.accountService.showMessage('E-mail ou senha inválidos');
+        this.accountService.showMessage('Ocorreu um erro!');
     }
   }
   createAccount(){

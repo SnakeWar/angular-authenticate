@@ -13,11 +13,12 @@ export class AccountService {
     private http: HttpClient,
     private snackBar: MatSnackBar) { }
 
-  showMessage(msg: string): void {
+  showMessage(msg: string, isError: boolean = false): void {
     this.snackBar.open(msg, 'Fechar', {
       duration: 3000,
       horizontalPosition: "right",
-      verticalPosition: "top"
+      verticalPosition: "top",
+      panelClass: isError ? ['msg-error'] : ['msg-success']
     })
   }
   async login(user: any) {

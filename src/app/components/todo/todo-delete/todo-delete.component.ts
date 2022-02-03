@@ -2,6 +2,7 @@ import { Todo } from './../todo.model';
 import { TodoService } from './../../services/todo.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderService } from '../../services/header/header.service';
 
 @Component({
   selector: 'app-todo-delete',
@@ -18,8 +19,15 @@ export class TodoDeleteComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private headerService: HeaderService
+  ) { 
+    headerService.HeaderData = {
+      title: 'Exclusão de Tarefa',
+      icon: 'delete',
+      routeUrl: '/todos'
+    }
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')

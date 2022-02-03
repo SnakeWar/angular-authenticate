@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
       // O request é imutavel, ou seja, não é possível mudar nada
       // Faço o clone para conseguir mudar as propriedades
       // Passo o token de autenticação no header
-      request = req.clone({
+      request = req.clone({ 
         headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
     }
@@ -49,10 +49,13 @@ export class AuthInterceptor implements HttpInterceptor {
     } else {
       // Erro retornando pelo backend
       if(error.status === 401){
-        console.error('E-mail ou senha inválidos!')
+        console.error('E-mail ou senha inválidos!');
+        //alert('E-mail ou senha inválidos!');
+        //this.snackBar.open('E-mail ou senha inválidos!', 'Fechar', { duration: 2000, panelClass: 'dangerSnack' });
       }
       else if(error.status === 422){
-        console.error('Senha muito curta!')
+        console.error('Senha muito curta!');
+        //alert('Senha muito curta!');
       }
       console.error(
         `Código do erro ${error.status}, ` +

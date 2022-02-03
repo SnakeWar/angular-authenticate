@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { AccountService } from './../../services/account/shared/account.service';
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from '../../services/header/header.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
@@ -31,4 +33,17 @@ export class HeaderComponent implements OnInit {
       console.error(error);
     }
   }
+
+  get title():string{
+    return this.headerService.HeaderData.title;
+  }
+  get icon():string{
+    return this.headerService.HeaderData.icon;
+  }
+  get routeUrl():string{
+    return this.headerService.HeaderData.routeUrl;
+  }
+  // set title():string{
+  //   return this.headerService.HeaderData.title;
+  // }
 }
